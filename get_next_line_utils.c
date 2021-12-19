@@ -14,25 +14,30 @@
 
 size_t	ft_strlen(const char *str)
 {
-	int	count;
+	int	i;
 
-	count = 0;
-	while (*str != '\0')
-	{
-		count++;
-		str++;
-	}
-	return (count);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+
+	return (i);
 }
 
-void	clean_buffer(char *buffer)
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	int i = 0;
-	while (buffer[i])
+	size_t	i;
+
+	if (size == 0)
+		return (ft_strlen(src));
+	i = 0;
+	while (src[i] != '\0' && i < size - 1)
 	{
-		buffer[i] = '\0';
+		dst[i] = src[i];
 		i++;
 	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
 
 #include <stdio.h>
@@ -63,7 +68,6 @@ char	*ft_strjoin(char *s1, char const *s2)
 		i++;
 	}
 	ret_str[i] = '\0';
-	free(s1);
 	return (ret_str);
 }
 
@@ -79,4 +83,22 @@ int contains_eol(const char *s)
 		i++;
 	}
 	return 0;
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int		i;
+	char	*ps;
+
+	ps = (char *)s;
+	i = 0;
+	while (ps[i])
+	{
+		if (ps[i] == (char)c)
+			return (&ps[i]);
+		i++;
+	}
+	if (c == '\0')
+		return (&ps[i]);
+	return (NULL);
 }

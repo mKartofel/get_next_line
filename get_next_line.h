@@ -18,8 +18,9 @@
 
 char	*get_next_line(int fd);
 int		contains_eol(const char *s);
-void	clean_buffer(char *buffer);
 char	*ft_strjoin(char *s1, char const *s2);
 size_t	ft_strlen(const char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	*ft_strchr(const char *s, int c);
 
 #endif
