@@ -19,10 +19,8 @@ size_t	ft_strlen(const char *str)
 	i = 0;
 	while (str[i] != '\0')
 		i++;
-
 	return (i);
 }
-
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
@@ -40,7 +38,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (ft_strlen(src));
 }
 
-#include <stdio.h>
 char	*ft_strjoin(char *s1, char const *s2)
 {
 	size_t	i;
@@ -49,7 +46,6 @@ char	*ft_strjoin(char *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	
 	i = ft_strlen(s1) + ft_strlen(s2);
 	ret_str = malloc(sizeof(char) * (i + 1));
 	if (!ret_str)
@@ -71,18 +67,18 @@ char	*ft_strjoin(char *s1, char const *s2)
 	return (ret_str);
 }
 
-int contains_eol(const char *s)
+int	contains_eol(const char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] == '\n')
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 char	*ft_strchr(const char *s, int c)
