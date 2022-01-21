@@ -59,7 +59,7 @@ int	read_and_add_to_string(int fd, ssize_t *ret, char **s, char *buffer)
 	}
 	buffer[*ret] = '\0';
 	tmp = *s;
-	*s = ft_strjoin(tmp, buffer);
+	*s = ft_strjoin(tmp, buffer); //PROTEGER CE MALLOC !
 	free(tmp);
 	return (1);
 }
