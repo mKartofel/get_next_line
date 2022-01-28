@@ -70,7 +70,7 @@ char	*get_next_line(int fd)
 	static char	buffer[BUFFER_SIZE + 1];
 	ssize_t		ret;
 
-	s = malloc(sizeof(char));
+	s = malloc(sizeof(char)); //PROTEGER CE MALLOC ?
 	s[0] = '\0';
 	if (contains_eol(buffer))
 	{
