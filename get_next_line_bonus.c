@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfiszbin <vfiszbin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:49:35 by vfiszbin          #+#    #+#             */
-/*   Updated: 2021/12/18 19:50:56 by vfiszbin         ###   ########.fr       */
+/*   Updated: 2022/05/30 16:13:57 by vfiszbin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,30 @@ int	read_and_add_to_string(int fd, ssize_t *ret, char **s, char *buffer)
 	tmp = *s;
 	*s = ft_strjoin(tmp, buffer);
 	free(tmp);
+	if (!s)
+		return (0);
 	return (1);
 }
 
+int	init_s(char *s)
+{
+	s = malloc(sizeof(char));
+	if (!s)
+		return (0);
+	s[0] = '\0';
+	return (1);
+}
+
+/*Return  a line read from the file descriptor fd.
+Return NULL if there is nothing left to read or in case of error*/
 char	*get_next_line(int fd)
 {
 	char		*s;
 	static char	buffer[BUFFER_SIZE + 1];
 	ssize_t		ret;
 
-	s = malloc(sizeof(char));
-	s[0] = '\0';
+	if (init_s(s) == 0)
+		return (NULL);
 	if (contains_eol(buffer))
 	{
 		s = retrieve_unused_buffer(s, buffer);

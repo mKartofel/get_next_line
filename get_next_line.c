@@ -6,7 +6,7 @@
 /*   By: vfiszbin <vfiszbin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:49:35 by vfiszbin          #+#    #+#             */
-/*   Updated: 2021/12/18 19:50:56 by vfiszbin         ###   ########.fr       */
+/*   Updated: 2022/05/30 16:14:41 by vfiszbin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,32 @@ int	read_and_add_to_string(int fd, ssize_t *ret, char **s, char *buffer)
 	}
 	buffer[*ret] = '\0';
 	tmp = *s;
-	*s = ft_strjoin(tmp, buffer); //PROTEGER CE MALLOC !
+	*s = ft_strjoin(tmp, buffer);
 	free(tmp);
+	if (!s)
+		return (0);
 	return (1);
 }
 
+int	init_s(char *s)
+{
+	s = malloc(sizeof(char));
+	if (!s)
+		return (0);
+	s[0] = '\0';
+	return (1);
+}
+
+/*Return  a line read from the file descriptor fd.
+Return NULL if there is nothing left to read or in case of error*/
 char	*get_next_line(int fd)
 {
 	char		*s;
 	static char	buffer[BUFFER_SIZE + 1];
 	ssize_t		ret;
 
-	s = malloc(sizeof(char)); //PROTEGER CE MALLOC ?
-	s[0] = '\0';
+	if (init_s(s) == 0)
+		return (NULL);
 	if (contains_eol(buffer))
 	{
 		s = retrieve_unused_buffer(s, buffer);
@@ -80,7 +93,7 @@ char	*get_next_line(int fd)
 	}
 	ret = 1;
 	while (!contains_eol(s) && ret > 0)
-		if (! read_and_add_to_string(fd, &ret, &s, buffer))
+		if (!read_and_add_to_string(fd, &ret, &s, buffer))
 			return (NULL);
 	if (ret == 0 && ft_strlen(s) == 0)
 	{
