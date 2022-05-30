@@ -6,7 +6,7 @@
 /*   By: vfiszbin <vfiszbin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:49:35 by vfiszbin          #+#    #+#             */
-/*   Updated: 2022/05/30 16:14:41 by vfiszbin         ###   ########.fr       */
+/*   Updated: 2022/05/30 16:18:14 by vfiszbin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	read_and_add_to_string(int fd, ssize_t *ret, char **s, char *buffer)
 	return (1);
 }
 
-int	init_s(char *s)
+int	init_s(char **s)
 {
-	s = malloc(sizeof(char));
-	if (!s)
+	*s = malloc(sizeof(char));
+	if (!*s)
 		return (0);
-	s[0] = '\0';
+	*s[0] = '\0';
 	return (1);
 }
 
@@ -83,7 +83,7 @@ char	*get_next_line(int fd)
 	static char	buffer[BUFFER_SIZE + 1];
 	ssize_t		ret;
 
-	if (init_s(s) == 0)
+	if (init_s(&s) == 0)
 		return (NULL);
 	if (contains_eol(buffer))
 	{
